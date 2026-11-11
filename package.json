@@ -12,7 +12,9 @@
     "vite": "^8.3.6"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.119.0",
     "react": "^19.3.1",
-    "react-dom": "^19.3.1"
+    "react-dom": "^19.3.1",
+    "typescript": "^7.0.2"
   }
 }
