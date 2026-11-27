@@ -13,20 +13,25 @@ const server = http.createServer(async (req,res) => {
     .select("*")
     .limit(1)
 
-    if (reqUrl === '/api' && req.method === 'GET') {
-        res.writeHead(error ? 500 : 200, {
-            "Content-Type" : 'application/json',
-        })
-        res.end(JSON.stringify(error ? {error: error.message} : {ok: true, todos: data}))
-
-        
-    }
 
     if (reqUrl === "/api/todos" && req.method === 'GET') {
-        res.writeHead(error ? 500 : 200, {
-            "Content-Type" : 'application/json',
-        })
+        res.setHeader("Content-Type", "application/json")
+        res.statusCode = 200
         res.end(JSON.stringify(error ? {error: error.message} : {ok: true, todos: data}))
+    } else if (reqUrl === "/api/todos/priority" && req.method === "GET") {
+        const {data, error} = await supabase
+            .from('todos')
+            .select('*')
+            .eq('priority', 1);
+
+        res.setHeader("Content-Type", "application/json")
+        res.statusCode = 200
+        res.end(JSON.stringify(error ? {error: error.message} : {ok: true, todos: data}))
+    }
+    else {
+        res.statusCode = 404
+        res.setHeader("Content-Type", "application/json")
+        res.end(JSON.stringify({error: "not found", message: "the route does not exist"}))
     }
 })
 

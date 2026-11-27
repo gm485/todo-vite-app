@@ -4,6 +4,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': 'http://localhost:8000',
+      '/api/priority' : 'http://localhost:8000'
     },
   },
 });
