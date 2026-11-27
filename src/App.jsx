@@ -1,5 +1,5 @@
 import { useEffect, useState} from 'react';
-import { getTodos } from './lib/supabase/todos';
+import { loadTodos } from './lib/api/loadTodos';
 
 export default function App() {
   //query the data
@@ -8,7 +8,7 @@ export default function App() {
 
 
   useEffect(() => {
-    getTodos()
+    loadTodos()
     .then(setTodos)
     .catch((err) => setError(err.message))
   }, []);
@@ -16,8 +16,7 @@ export default function App() {
   return (
     <main>
       <h1>Todo App</h1>
-      {error ? <p role="alert">{error}</p> 
-      : <pre>{JSON.stringify(todos, null, 2)}</pre>}
+      {error ? <p role="alert">{error}</p> : <pre>{JSON.stringify(todos, null, 2)}</pre>}
     </main>
   )
 
