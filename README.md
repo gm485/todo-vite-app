@@ -17,5 +17,4 @@
 | Method | Endpoint | Description |
 |--- | --- | --- |
 | GET | [`/api/todos`](http://localhost:8000/api/todos) | retrieves a single note from the database, and every attribute from the data
-|
 | GET | [`/api/todos/priority`](http://localhost:8000/api/todos/priority) | retrieves all the notes with a priority of 1
