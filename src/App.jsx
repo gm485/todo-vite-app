@@ -1,24 +1,20 @@
-import { useEffect, useState} from 'react';
-import { getTodos } from './lib/supabase/todos';
+import { Link, Route, Routes } from 'react-router';
+import TodosPage from './pages/TodosPage';
+import PriorityTodosPage from './pages/PriorityTodosPage';
 
 export default function App() {
-  //query the data
-  const [todos, setTodos] = useState([])
-  const [error, setError] = useState('')
-
-
-  useEffect(() => {
-    getTodos()
-    .then(setTodos)
-    .catch((err) => setError(err.message))
-  }, []);
-
   return (
-    <main>
-      <h1>Todo App</h1>
-      {error ? <p role="alert">{error}</p> 
-      : <pre>{JSON.stringify(todos, null, 2)}</pre>}
-    </main>
-  )
+    <>
+      <nav>
+        <Link to="/">All todos</Link>
+        {' | '}
+        <Link to="/priority">Priority todos</Link>
+      </nav>
 
+      <Routes>
+        <Route path="/" element={<TodosPage />} />
+        <Route path="/priority" element={<PriorityTodosPage />} />
+      </Routes>
+    </>
+  );
 }
